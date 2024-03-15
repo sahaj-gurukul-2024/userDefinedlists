@@ -1,91 +1,94 @@
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import org.sahaj.meetingbookingss.EmptyList
-import org.sahaj.meetingbookingss.NonEmptyList
+import org.sahaj.meetingbookingss.EmptyIntegerList
+import org.sahaj.meetingbookingss.NonEmptyIntegerList
 import kotlin.test.assertEquals
 
-class ListThingTest {
+class IntegerListThingTest {
 
     @Test
     fun `append to list`() {
         assertEquals(
-            NonEmptyList(1, NonEmptyList(2, EmptyList)),
-            NonEmptyList(1, EmptyList).append(2)
+            NonEmptyIntegerList(1, NonEmptyIntegerList(2, EmptyIntegerList)),
+            NonEmptyIntegerList(1, EmptyIntegerList).append(2)
         )
     }
 
     @Test
     fun `prepend to list`() {
         assertEquals(
-            NonEmptyList(2, NonEmptyList(1, EmptyList)),
-            NonEmptyList(1, EmptyList).prepend(2)
+            NonEmptyIntegerList(2, NonEmptyIntegerList(1, EmptyIntegerList)),
+            NonEmptyIntegerList(1, EmptyIntegerList).prepend(2)
         )
     }
 
     @Test
     fun `Index checks`() {
-        assertEquals(1, NonEmptyList(1, EmptyList).getByIndex(0))
-        assertThrows<IndexOutOfBoundsException> { NonEmptyList(1, EmptyList).getByIndex(2) }
+        assertEquals(1, NonEmptyIntegerList(1, EmptyIntegerList).getByIndex(0))
+        assertThrows<IndexOutOfBoundsException> { NonEmptyIntegerList(1, EmptyIntegerList).getByIndex(2) }
     }
 
     @Test
     fun `get square list`() {
         assertEquals(
-            NonEmptyList(4, NonEmptyList(9, EmptyList)),
-            NonEmptyList(2, NonEmptyList(3, EmptyList)).getPower(2)
+            NonEmptyIntegerList(4, NonEmptyIntegerList(9, EmptyIntegerList)),
+            NonEmptyIntegerList(2, NonEmptyIntegerList(3, EmptyIntegerList)).getPower(2)
         )
     }
 
     @Test
     fun `get cube list`() {
         assertEquals(
-            NonEmptyList(8, NonEmptyList(27, EmptyList)),
-            NonEmptyList(2, NonEmptyList(3, EmptyList)).getPower(3)
+            NonEmptyIntegerList(8, NonEmptyIntegerList(27, EmptyIntegerList)),
+            NonEmptyIntegerList(2, NonEmptyIntegerList(3, EmptyIntegerList)).getPower(3)
         )
     }
 
     @Test
     fun `increment list`() {
         assertEquals(
-            NonEmptyList(1, NonEmptyList(2, EmptyList)),
-            NonEmptyList(0, NonEmptyList(1, EmptyList)).incrementBy(1)
+            NonEmptyIntegerList(1, NonEmptyIntegerList(2, EmptyIntegerList)),
+            NonEmptyIntegerList(0, NonEmptyIntegerList(1, EmptyIntegerList)).incrementBy(1)
         )
     }
 
     @Test
     fun `odd list`() {
         assertEquals(
-            NonEmptyList(1, NonEmptyList(3, EmptyList)),
-            NonEmptyList(1, NonEmptyList(3, EmptyList)).odds()
+            NonEmptyIntegerList(1, NonEmptyIntegerList(3, EmptyIntegerList)),
+            NonEmptyIntegerList(1, NonEmptyIntegerList(3, EmptyIntegerList)).odds()
         )
     }
 
     @Test
     fun `even list`() {
         assertEquals(
-            NonEmptyList(2, NonEmptyList(4, EmptyList)),
-            NonEmptyList(2, NonEmptyList(4, NonEmptyList(5, EmptyList))).evens()
+            NonEmptyIntegerList(2, NonEmptyIntegerList(4, EmptyIntegerList)),
+            NonEmptyIntegerList(2, NonEmptyIntegerList(4, NonEmptyIntegerList(5, EmptyIntegerList))).evens()
         )
     }
+
     @Test
     fun `sum of list`() {
         assertEquals(
             6,
-            NonEmptyList(2, NonEmptyList(4, EmptyList)).sum()
+            NonEmptyIntegerList(2, NonEmptyIntegerList(4, EmptyIntegerList)).sum()
         )
     }
+
     @Test
     fun `max of list`() {
         assertEquals(
             4,
-            NonEmptyList(2, NonEmptyList(4, EmptyList)).max()
+            NonEmptyIntegerList(2, NonEmptyIntegerList(4, EmptyIntegerList)).max()
         )
     }
+
     @Test
     fun `min of list`() {
         assertEquals(
             2,
-            NonEmptyList(4, NonEmptyList(2, EmptyList)).min()
+            NonEmptyIntegerList(4, NonEmptyIntegerList(2, EmptyIntegerList)).min()
         )
     }
 }
