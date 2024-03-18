@@ -65,7 +65,10 @@ class StringListThingTest {
     fun `list of sizes`() {
         assertEquals(
             NonEmptyIntegerList(5, NonEmptyIntegerList(5, EmptyIntegerList)),
-            NonEmptyStringThing("Hello", NonEmptyStringThing("World", EmptyStringThing)).intList()
+            NonEmptyStringThing(
+                "Hello",
+                NonEmptyStringThing("World", EmptyStringThing)
+            ).intList()
         )
     }
 
@@ -81,7 +84,10 @@ class StringListThingTest {
     fun `single string with spaces`() {
         assertEquals(
             "Hello World",
-            NonEmptyStringThing("Hello", NonEmptyStringThing("World", EmptyStringThing)).combine()
+            NonEmptyStringThing(
+                "Hello",
+                NonEmptyStringThing("World", EmptyStringThing)
+            ).concater(" ")
         )
     }
 
@@ -89,7 +95,10 @@ class StringListThingTest {
     fun `first letters string`() {
         assertEquals(
             "HW",
-            NonEmptyStringThing("Hello", NonEmptyStringThing("World", EmptyStringThing)).combineLetters()
+            NonEmptyStringThing(
+                "Hello",
+                NonEmptyStringThing("World", EmptyStringThing)
+            ).concaterLetters("")
         )
     }
 }

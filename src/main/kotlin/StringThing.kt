@@ -17,10 +17,10 @@ sealed interface StringThing {
         is NonEmptyStringThing -> if (index == 0) head else tail.get(index - 1)
     }
 
-    fun transform(transformFunction: (String) -> String): StringThing = when (this) {
-        EmptyStringThing -> EmptyStringThing
-        is NonEmptyStringThing -> NonEmptyStringThing(transformFunction(head), tail.transform(transformFunction))
-    }
+    fun transform(transformFunction: (String) -> String): StringThing //= when (this) {
+//        EmptyStringThing -> EmptyStringThing
+//        is NonEmptyStringThing -> NonEmptyStringThing(transformFunction(head), tail.transform(transformFunction))
+//    }
 
     fun upper(): StringThing = transform { it.uppercase() }
 
@@ -36,24 +36,32 @@ sealed interface StringThing {
         is NonEmptyStringThing -> NonEmptyIntegerList(head.length, tail.intList())
     }
 
-    fun combine(): String = when (this) {
-        EmptyStringThing -> ""
-        is NonEmptyStringThing -> {
-            val tailCombine = tail.combine()
-            if (tail is NonEmptyStringThing) "$head $tailCombine" else "$head$tailCombine"
-        }
+    fun concater(sep: String): String {
+        val getHead: (String) -> String = {it}
+        return fn1(getHead, sep)
     }
 
-    fun combineLetters(): String = when (this) {
+    fun fn1(getHead: (String) -> String, sep: String) = when (this) {
         EmptyStringThing -> ""
-        is NonEmptyStringThing -> {
-            val tailFirst = tail.combineLetters()
-            val headFirst = head.first()
-            if (tail is NonEmptyStringThing) "$headFirst$tailFirst" else headFirst.toString()
-        }
+        is NonEmptyStringThing -> "${getHead(head)}$sep${tail.concater(sep)}".trim()
+    }
+
+    fun concaterLetters(sep: String): String{
+        val getHead: (String) -> Char = { it.first() }
+        return fn2(getHead, sep)
+    }
+
+    fun fn2(getHead: (String) -> Char, sep: String) = when (this) {
+        EmptyStringThing -> ""
+        is NonEmptyStringThing -> "${getHead(head)}$sep${tail.concaterLetters(sep)}".trim()
     }
 }
 
-data class NonEmptyStringThing(val head: String, val tail: StringThing) : StringThing
+data class NonEmptyStringThing(val head: String, val tail: StringThing) : StringThing{
+    override fun transform(transformFunction: (String) -> String): StringThing =
+        NonEmptyStringThing(transformFunction(head), tail.transform(transformFunction))
+}
 
-data object EmptyStringThing : StringThing
+data object EmptyStringThing : StringThing{
+    override fun transform(transformFunction: (String) -> String): StringThing = this
+}
