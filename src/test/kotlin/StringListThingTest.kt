@@ -5,7 +5,6 @@ import org.sahaj.meetingbookingss.EmptyIntegerList
 import org.sahaj.meetingbookingss.EmptyStringThing
 import org.sahaj.meetingbookingss.NonEmptyIntegerList
 import org.sahaj.meetingbookingss.NonEmptyStringThing
-import kotlin.math.E
 
 class StringListThingTest {
 
@@ -87,7 +86,7 @@ class StringListThingTest {
             NonEmptyStringThing(
                 "Hello",
                 NonEmptyStringThing("World", EmptyStringThing)
-            ).concater(" ")
+            ).concatenateString(" ")
         )
     }
 
@@ -98,7 +97,7 @@ class StringListThingTest {
             NonEmptyStringThing(
                 "Hello",
                 NonEmptyStringThing("World", EmptyStringThing)
-            ).concaterLetters("")
+            ).concatenateLetters("")
         )
     }
 }

@@ -7,7 +7,6 @@
     <list default="true" id="1daa356e-f491-41f0-a891-ada71be907c5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/StringThing.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/StringThing.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/kotlin/StringListThingTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/StringListThingTest.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
