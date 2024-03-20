@@ -23,20 +23,9 @@ sealed interface IntegerListThing {
 
     fun filterOddEven(filterFunction: (Int) -> Boolean): IntegerListThing
 
-    fun max(): Int? {
-        return when (this) {
-            EmptyIntegerList -> null
-            is NonEmptyIntegerList -> {
-                if (head > (tail.max() ?: Int.MIN_VALUE)) head else tail.max()
-            }
-        }
+    fun max(): Int?
 
-    }
-
-    fun min(): Int? = when (this) {
-        EmptyIntegerList -> null
-        is NonEmptyIntegerList -> if (head < (tail.max() ?: Int.MAX_VALUE)) head else tail.min()
-    }
+    fun min(): Int?
 }
 
 data class NonEmptyIntegerList(val head: Int, val tail: IntegerListThing) : IntegerListThing{
@@ -53,11 +42,13 @@ data class NonEmptyIntegerList(val head: Int, val tail: IntegerListThing) : Inte
     override fun sum(): Int = head + (tail.sum() ?: 0)
 
     override fun filterOddEven(filterFunction: (Int) -> Boolean): IntegerListThing =
-        if (filterFunction(head)) NonEmptyIntegerList(
-            head, tail.filterOddEven(filterFunction)
-        ) else tail.filterOddEven(
-            filterFunction
-        )
+        if (filterFunction(head))
+            NonEmptyIntegerList(head, tail.filterOddEven(filterFunction))
+        else
+            tail.filterOddEven(filterFunction)
+    override fun max(): Int? = if (head > (tail.max() ?: Int.MIN_VALUE)) head else tail.max()
+
+    override fun min(): Int? = if (head < (tail.min() ?: Int.MAX_VALUE)) head else tail.max()
 
 }
 
@@ -73,4 +64,8 @@ data object EmptyIntegerList : IntegerListThing{
     override fun sum(): Int? = null
 
     override fun filterOddEven(filterFunction: (Int) -> Boolean): IntegerListThing = EmptyIntegerList
+
+    override fun max(): Int? = null
+
+    override fun min(): Int? = null
 }
